@@ -1,127 +1,21 @@
-<section class="section ticketSoporte">
-  <div class="ticketSoporte-inner">
-      <h1>Obtén atención personalizada</h1>
-   </div>
-</section>
+<nav class="sub-nav clearfix">
+  {{breadcrumbs}}
+</nav>
 
-<div class="container">
-  <nav class="sub-nav">
-    {{breadcrumbs}}
-  </nav>
+<div class="clearfix">
 
-  <h1>
-    {{t 'submit_a_request'}}
-    {{#if follow_up}}
+  <section class="main-column">
+    <h1>{{t 'submit_a_request'}}{{#if parent}}
       <span class="follow-up-hint">
         {{follow_up}}
       </span>
-    {{/if}}
-  </h1>
+    {{/if}}</h1>
 
-  <div class="form">
-    {{request_form}}
-  </div>
-
-  {{chat}}
-
-
-<div class="tab_container">
-    <h2>Centros de soporte en latinoamérica</h2>
-			<input class="input-soporte" id="tab1" type="radio" name="tabs" >
-			<label for="tab1" class="label-soporte"><span>Chile</span></label>
-
-			<input class="input-soporte" id="tab2" type="radio" name="tabs" checked>
-			<label for="tab2" class="label-soporte"><span>Colombia</span></label>
-
-			<input class="input-soporte" id="tab3" type="radio" name="tabs">
-			<label for="tab3" class="label-soporte"><span>México</span></label>
-
-			<input class="input-soporte" id="tab4" type="radio" name="tabs">
-			<label for="tab4" class="label-soporte"><span>Panamá</span></label>
-
-		<input class="input-soporte" id="tab5" type="radio" name="tabs">
-			<label for="tab5" class="label-soporte"><span>Perú</span></label>
-
-			<section id="content1" class="tab-content section-soporte">
-		      	<p>Lanix Chile cuenta con una alianza estratégica con el Operador de Servicio Claro, lo cual permite brindar una excelente cobertura en todo el país.</p>
-
-<p>Seleccionar el más cercano es muy fácil, solo debes hacer clic en el siguiente enlace: <a target='_blank' href='http://www.clarochile.cl/personas/'>http://www.clarochile.cl/personas/</a></p>
-
-<p>Escoge el tipo de servicio e inmediatamente el sistema mostrará una completa consulta geográfica con todos los puntos Claro disponible en tu localidad.</p>
-
-<p>Al seleccionar el CAV de tu conveniencia podrás ver el nombre, dirección exacta y horario. Toma nota e ingresa tu celular tan pronto como sea posible.</p>
-			</section>
-			<section id="content2" class="tab-content  section-soporte">
-		      	<p>Lanix Colombia cuenta con una alianza estratégica con el Operador de Servicio Claro, lo cual permite brindar una excelente cobertura en todo el país.</p>
-
-<p>Seleccionar el más cercano es muy fácil, solo debes hacer clic en el siguiente enlace: <a target='_blank' href='http://www.claro.com.co/personas/soporte/tiendas/'> http://www.claro.com.co/personas/soporte/tiendas/</a></p>
-
-<p>Escoge el departamento y la ciudad donde estas ubicado e inmediatamente el sistema mostrará una completa consulta geográfica con todos los puntos Claro disponible en tu localidad.</p>
-
-<p>Al seleccionar el CAV de tu conveniencia podrás ver el nombre, dirección exacta y horario. Toma nota e ingresa tu celular tan pronto como sea posible.</p>
-			</section>
-
-			<section id="content3" class="tab-content  section-soporte">
-        				<h2>Baja California </h2>
-		      	<p>
-
-CSL Mexicali
-Av. Alfareros #1301, calle de la industria y calle F
-Col. Industrial, Mexicali, BAJA CALIFORNIA
-C.P. 21010
-CONTACTO (686) 566-6518</p>
-         <h2>Chiapas</h2>
-<p>PRINTONET COMPUTACION Circunvalación Tapachula # 340-b, Col. Moctezuma Tuxtla Gutiérrez, CHIAPAS C.P. 29030 CONTACTO (961) 121-5430</p>
-        <h2>Chihuahua</h2>
-<p>Laser Disk Computación. Col. Ciudad Juárez, CHIHUAHUA. CONTACTO (656) 208-4880 Y (656) 616-4777</p>
-
-<h2>Ciudad de México</h2>
-<p>Sistemas Matrix Av. Adolfo López Mateos #509, Chimalhuacán y cama de piedra Col. Aurora 1er sección (Benito Juárez) Nezahualcóyotl, CIUDAD DE MEXICO C.P. 57000 CONTACTO (55) 6586-9492</p>
-<p>TECNOBIT SA DE CV Av. Baja California No. 177 Int. 101, Manzanillo y Tlacotalpan Col. Roma Sur Del. Cuauhtémoc, CIUDAD DE MEXICO C.P. 06760 CONTACTO (55) 5574-5453</p>
-
-
-<h2>Guanajuato</h2>
-<p>Corporativo Nethost, S.A de C.V. Paseo de los Canarios 227, Col. San isidro León, GUANAJUATO C.P. 37530. CONTACTO (477) 711-0210</p>
-        <h2>Jalisco</h2>
-
-<p>F&G COMUNICACIONES S.A. DE C.V. Juan Pablo Segundo #1183, Col. El Mirador, Guadalajara, JALISCO C.P. 44370 CONTACTO (33) 3609-5125</p>
-<h2>Michoacan    </h2>
-<p>INTED MORELIA. Juan José de Lejarza #350, Col. Centro Morelia, MICHOACAN. C.P. 58000. CORREO intedmorelia@hotmail.com</p>
-<h2>Puebla  </h2>
-<p>TEKNE TALLER Y SOLUCIONES DIGITALES. Av. Reforma 3102, Col. Amor, Puebla, PUEBLA C.P. 72140. CONTACTO (222) 699-6141</p>
-        <h2>Oaxaca</h2>
-<p>QTECHONOLOGIES SERVICES Amapolas 819-B, Col. Reforma, Oaxaca, OAXACA C.P. 68050 CONTACTO (951) 132-6722</p>
-        <h2>Sinaloa</h2>
-<p>RESCATE PC Rodolfo G. Robles #232, esq. Carl Mariano Escobedo Col. Centro Culiacán, SINALOA C.P. 80000 CORREO caslanixcln@rescatepc.com</p>
-<h2>Sonora</h2>
-
-<p>Planta LANIX Hermosillo. Carretera Hermosillo-Nogales km 8.5, Col. San Luis, Hermosillo, SONORA. C.P. 83160 CONTACTO (662) 109-0807</p>
-<p>ONLY PRINTERS Calle Puebla Sur #333, Col. Centro Obregón, SONORA C.P. 85000 CONTACTO (644) 414-7088</p>
-<h2>Tabasco</h2>
-<p>TECNO MART Carlos Pellicer S/N, Plaza San Luis Local #47, Col. Tamulté, Villahermosa, TABASCO C.P. 86150 CONTACTO (983) 832-0006</p>
-<h2>Veracruz</h2>
-<p>COMPUTACIÓN PERSONAL Francisco Javier Clavijero #196, 20 de Noviembre e Isausto Acosta Col. Centro Xalapa, VERACRUZ C.P. 91000 CONTACTO (228) 815-5496</p>
-
-			</section>
-
-			<section id="content4" class="tab-content  section-soporte">
-     <p>Lanix Panamá cuenta con una alianza estratégica con el Operador de Servicio Claro, lo cual permite brindar una excelente cobertura en todo el país.</p>
-
-<p>Seleccionar el más cercano es muy fácil, solo debes hacer clic en el siguiente enlace: <a target='_blank' href='http://www.claro.com.pa/personas/'> http://www.claro.com.pa/personas/</a></p>
-
-<p>Escoge el tipo de servicio e inmediatamente el sistema mostrará una completa consulta geográfica con todos los puntos Claro disponible en tu localidad.</p>
-
-			</section>
-
-			<section id="content5" class="tab-content  section-soporte">
-     <p>Lanix Perú cuenta con una alianza estratégica con el Operador de Servicio Claro, lo cual permite brindar una excelente cobertura en todo el país.</p>
-
-<p>Seleccionar el más cercano es muy fácil, solo debes hacer clic en el siguiente enlace: <a target='_blank' href='http://www.claro.com.pe/contactanos/?tab=ubicanos'>http://www.claro.com.pe/contactanos/?tab=ubicanos</a></p>
-
-<p>Escoge el tipo de servicio e inmediatamente el sistema mostrará una completa consulta geográfica con todos los puntos Claro disponible en tu localidad.</p>
-
-			</section>
-		</div>
-
+    <div class="form">
+      {{request_form}}
+    </div>
+  </section>
 
 </div>
+
+{{chat}}

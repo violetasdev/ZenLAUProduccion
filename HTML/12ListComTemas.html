@@ -1,93 +1,51 @@
-<section class="section hero community-hero">
-  <div class="hero-inner">
-    {{search submit=false class='search search-full' scoped=true}}
-  </div>
-</section>
+<nav class="sub-nav clearfix">
+  <h4 class="community-heading">
+    {{t 'community'}}
+  </h4>
+  {{search}}
+</nav>
 
-<div class="container">
-  <nav class="sub-nav">
-    {{breadcrumbs}}
-  </nav>
+<nav class="community-nav">
+  <ul>
+    <li>{{t 'topics'}}</li>
+    <li>{{link 'posts'}}</li>
+    <li>{{link 'new_post' role='button'}}</li>
+  </ul>
+</nav>
 
-  <header class="page-header community-header">
-    <div class="page-header-item dropdown">
-      <div class="dropdown-toggle">
-        <h4>{{t 'community_topics'}}</h4>
-      </div>
-      <span class="dropdown-menu" role="menu">
-        {{#link 'topics' role='menuitem' selected='true'}}
-          {{t 'show_topics'}}
-        {{/link}}
-        {{#link 'posts' role='menuitem'}}
-          {{t 'show_all_posts'}}
-        {{/link}}
-      </span>
-    </div>
-    <!--span class="page-header-item post-to-community">
-      {{link 'new_post' role='button' class='button-large'}}
-    </span-->
-  </header>
+<div class="clearfix">
+  <div class="main-column">
 
-  {{#unless topics}}
-    <p>{{t 'no_content'}}</p>
-  {{/unless}}
+    <nav class="community-sub-nav">
+      <ul>
+        <li>{{t 'all'}}</li>
+      </ul>
+    </nav>
 
-  <div class="blocks topics">
-    <ul class="blocks-list topics-list">
-      {{#each topics}}
-        <li class="blocks-item topics-item {{#if internal}}blocks-item-internal{{/if}}">
-           <a href="{{url}}" class="blocks-item-link">
-             <h4 class="blocks-item-title">
-               {{name}}
-
-               {{#if internal}}
-                 <span class="icon-lock" title="{{t 'internal'}}"></span>
-               {{/if}}
-             </h4>
-             <p class="blocks-item-description">{{excerpt description}}</p>
-             <ul class="meta-group">
-               <li class="meta-data">{{t 'post_count' count=post_count}}</li>
-               <li class="meta-data">{{t 'follower_count' count=follower_count}}</li>
-             </ul>
-           </a>
-        </li>
-      {{/each}}
-    </ul>
-  </div>
-
-  {{pagination}}
-
-  {{#if featured_posts}}
-    <section class="section community-featured-posts">
-      <h3>{{t 'featured_posts'}}</h3>
-      <ul class="promoted-articles">
-        {{#each featured_posts}}
-          <li class="promoted-articles-item">
-            <a href="{{url}}">
-              {{title}}
-            </a>
+    {{#if topics}}
+      <ul class="topic-list">
+        {{#each topics}}
+          <li class="topic">
+            <h3 class="topic-title">
+              {{#if internal}}
+                <span class="visibility-internal" data-title="{{t 'internal'}}">
+                  <span class="visibility-internal-icon"></span>
+                </span>
+              {{/if}}
+              <a href="{{url}}">{{name}}</a>
+            </h3>
+            <span class="topic-meta">
+              <span>{{t 'post_count' count=post_count}}</span>
+              <span>{{t 'follower_count' count=follower_count}}</span>
+            </span>
           </li>
         {{/each}}
       </ul>
-    </section>
-  {{/if}}
-
-  <section class="community-activity activity">
-    {{#if help_center.community_enabled}}
-      {{recent_activity scope='community'}}
+    {{else}}
+      <p>{{t 'no_content'}}</p>
     {{/if}}
-  </section>
 
-<section class="container community-footer">
-  <h4>{{t 'suggest_new_post'}}</h4>
-      <section class="section community">
-       <h2>Contactar un agente</h2>
+    {{pagination}}
 
-{{#link 'new_request'}}
-     <ul>
-        <li class="agentefont"> <i class="fa fa-handshake-o fa-4x "></i></li></ul>
-          {{/link}}
-    </section>
-  <!--p>{{link 'new_post' role='button' class='button-large'}}</p!-->
-</section>
+  </div>
 </div>

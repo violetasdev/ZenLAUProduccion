@@ -1,49 +1,57 @@
-<div class="container-divider"></div>
-<div class="container">
-  <nav class="sub-nav">
-    {{breadcrumbs}}
-    {{search submit=false}}
-  </nav>
+<nav class="sub-nav clearfix">
+  <h4 class="community-heading">
+    {{t 'community_heading'}}
+  </h4>
+  {{search}}
+</nav>
 
-  <h1 class="form-header">
-    {{t 'what_is_your_post_about'}}
-  </h1>
+<nav class="community-nav">
+  <ul>
+    <li>{{link 'topics'}}</li>
+    <li>{{link 'posts'}}</li>
+    <li>{{link 'new_post' role='button'}}</li>
+  </ul>
+</nav>
 
-  <div class="form">
-    {{#form 'post' class='new_community_post'}}
-      <div class="form-field {{#required 'title'}} required {{/required}}">
-        {{label 'title'}}
-        {{input 'title' autofocus=true}}
-        {{#validate 'title'}}
-          <div class="notification notification-error notification-inline">
-            {{error 'title'}}
-          </div>
-        {{/validate}}
-      </div>
+<div class="clearfix">
+  <h1>{{t 'what_is_your_post_about'}}</h1>
+  <div class="main-column">
+    <div class="form">
+      {{#form 'post' class='new_community_post'}}
+        <div class="form-field {{#required 'title'}}required{{/required}}">
+          {{label 'title'}}
+          {{input 'title'}}
+          {{#validate 'title'}}
+            <div class="notification notification-error notification-inline">
+              {{error 'title'}}
+            </div>
+          {{/validate}}
+        </div>
 
-      {{suggestion_list class='suggestion-list'}}
+        {{suggestion_list class='searchbox'}}
 
-      <div class="form-field {{#required 'details'}} required {{/required}}">
-        {{label 'details'}}
-        {{wysiwyg 'details'}}
-        {{#validate 'details'}}
-          <div class="notification notification-error notification-inline">
-            {{error 'details'}}
-          </div>
-        {{/validate}}
-      </div>
+        <div class="form-field {{#required 'details'}}required{{/required}}">
+          {{label 'details'}}
+          {{wysiwyg 'details'}}
+          {{#validate 'details'}}
+            <div class="notification notification-error notification-inline">
+              {{error 'details'}}
+            </div>
+          {{/validate}}
+        </div>
 
-      <div class="form-field {{#required 'topic'}} required {{/required}}">
-        {{label 'topic'}}
-        {{select 'topic'}}
-        {{#validate 'topic'}}
-          <div class="notification notification-error notification-inline">
-            {{error 'topic'}}
-          </div>
-        {{/validate}}
-      </div>
+        <div class="form-field {{#required 'topic'}}required{{/required}}">
+          {{label 'topic'}}
+          {{select 'topic'}}
+          {{#validate 'topic'}}
+            <div class="notification notification-error notification-inline">
+              {{error 'topic'}}
+            </div>
+          {{/validate}}
+        </div>
 
-      <footer>{{input type='submit'}}</footer>
-    {{/form}}
+        <footer>{{input type='submit'}}</footer>
+      {{/form}}
+    </div>
   </div>
 </div>

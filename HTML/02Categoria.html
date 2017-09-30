@@ -1,123 +1,54 @@
-{{#is category.name 'Móvil'}}
+<nav class="sub-nav clearfix category-breadcrumbs">
+  {{breadcrumbs}}
+</nav>
 
-<section class="section cateMovil">
-  {{/is}}
+<section class="clearfix">
+  <h1>{{category.name}}</h1>
+  <p class="category-description">{{category.description}}</p>
+  {{#if category.sections}}
+    <div class="section-tree">
+      {{#each sections}}
+        <section class="section">
+          <h3>
+            {{#if internal}}
+              <span class="visibility-internal" data-title="{{t 'internal'}}">
+                <span class="visibility-internal-icon"></span>
+              </span>
+            {{/if}}
 
-  {{#is category.name 'Tablet'}}
+            <a href="{{url}}">{{name}}</a>
+          </h3>
 
-<section class="section catTab">
-  {{/is}}
+          {{#if articles}}
+            <ul class="article-list">
+              {{#each articles}}
+                <li {{#if promoted}} class="article-promoted" {{/if}} >
+                  {{#if promoted}}
+                    <span data-title="{{t 'promoted'}}">★</span>
+                  {{/if}}
+                  <a href="{{url}}">{{title}}</a>
+                </li>
+              {{/each}}
+            </ul>
 
-  {{#is category.name 'Cómputo'}}
-
-<section class="section catComp">
-  {{/is}}
-
-  <div class="hero-inner">
-      <h1>¿Qué deseas consultar sobre {{category.name}}?</h1>
-    {{search submit=false instant=true class='search search-full'}}
-             {{#link 'new_request'  class="blocks-barra-link"}}
-             <h2>Contactar un agente de soporte</h2>
-          {{/link}}
-  </div>
-</section>
-
-<div class="container">
-    <nav class="sub-nav">
-    {{breadcrumbs}}
-  </nav>
-
-  <section class="section knowledge-base">
-    <section class="categories blocks">
-      <ul class="blocks-list">
-        {{#each sections}}
-                    <li class="blocks-item">
-              <a href='{{url}}' class="blocks-item-link">
-                <h4 class="blocks-item-title">{{name}}</h4>
-                <p class="blocks-item-description">{{excerpt description}}</p>
+            {{#if more_articles}}
+              <a href="{{url}}" class="see-all-articles">
+                {{t 'show_all_articles' count=article_count}}
               </a>
-            </li>
-        {{/each}}
-      </ul>
-    </section>
-   </section>
+            {{/if}}
 
-  <section class="articles frecuente">
-        <h2>Búsquedas frecuentes</h2>
-        <ul class="article-list frecuente-articles">
-
-          {{#each sections}}
-        {{#is name 'Catálogo'}}
-        {{else}}
-                     {{#if articles}}
-            {{#each articles}}
-                                    {{#if promoted}}
-           <li class="frecuente-articles-item">
-              <a href="{{url}}">
-                {{title}}
-              </a>
-              <div class="texto frecuente-textoSeccion" >
-               <p>{{body}}</p>
-              </div>
-            </li>
           {{else}}
-
+            <i class="section-empty">
+              <a href="{{url}}">{{t 'empty'}}</a>
+            </i>
           {{/if}}
-          {{/each}}
-          {{/if}}
-          {{/is}}
-          {{/each}}
-        </ul>
-      </section>
+        </section>
+      {{/each}}
+    </div>
 
-      <section class="articles frecuente">
-        <h2>{{t 'knowledge_base'}}</h2>
-        <ul class="article-list frecuente-articles">
-
-          {{#each sections}}
-        {{#is name 'Catálogo'}}
-        {{else}}
-                     {{#if articles}}
-            {{#each articles}}
-                                    {{#if promoted}}{{else}}
-            <li class="frecuente-articles-item">
-              <a href="{{url}}">
-                {{title}}
-              </a>
-              <div class="texto frecuente-textoSeccion" >
-               <p>{{body}}</p>
-              </div>
-            </li>
-
-          {{/if}}
-          {{/each}}
-          {{/if}}
-          {{/is}}
-          {{/each}}
-
-        </ul>
-                       <a href='/hc/es/search?utf8=✓&query={{category.name}}' class="blocks-item-link">
-                <p class="blocks-item-description">Ver más</p>
-              </a>
-      </section>
-
-
-{{#if help_center.community_enabled}}
-    <section class="community-activity activity">
-     {{recent_activity scope='community'}}
-  </section>
-
-
-{{/if}}
-
-    <section class="section community">
-       <h2>Contactar un agente</h2>
-
-{{#link 'new_request'}}
-     <ul>
-        <li class="agentefont"> <i class="fa fa-handshake-o fa-5x "></i></li></ul>
-          {{/link}}
-    </section>
-
-
-</div>
+  {{else}}
+    <i class="category-empty">
+      <a href="{{category.url}}">{{t 'empty'}}</a>
+    </i>
+  {{/if}}
+</section>

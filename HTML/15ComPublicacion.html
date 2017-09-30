@@ -1,225 +1,214 @@
-<div class="container-divider"></div>
-<div class="container">
-  <nav class="sub-nav">
-    {{breadcrumbs}}
-    {{search scoped=true submit=false}}
-  </nav>
+<nav class="sub-nav clearfix">
+  <h4 class="community-heading">
+    {{t 'community'}}
+  </h4>
+  {{search scoped=true}}
+</nav>
 
-  <div class="post-container">
-    <div class="post">
-      <article>
-        <header class="post-header">
-          <div class="post-title">
-            <h1 title="{{post.title}}">
-              {{post.title}}
-              {{#if post.internal}}
-                <span class="icon-lock" title="{{t 'internal'}}"></span>
-              {{/if}}
-            </h1>
-            {{#if post.pinned}}
-              <span class="status-label status-label-pinned">{{t 'pinned'}}</span>
-            {{/if}}
+<nav class="community-nav">
+  <ul>
+    <li>{{link 'topics'}}</li>
+    <li>{{link 'posts'}}</li>
+    <li>{{link 'new_post' role='button'}}</li>
+  </ul>
+</nav>
 
-            {{#if post.featured}}
-              <span class="status-label status-label-featured">{{t 'featured'}}</span>
-            {{/if}}
+<div class="clearfix">
+  <div class="main-column">
 
-            {{#is post.status 'none'}}
+    <header class="question-header">
+      <h3 class="question-heading">
+        {{t 'post'}}
+      </h3>
+      <span class="question-meta">
+        {{t 'follower_count' count=post.follower_count}}
+      </span>
+      <span>{{subscribe}}</span>
+    </header>
+
+    <div class="question {{#if post.featured}} post-featured {{/if}} {{#if post.pinned}} post-pinned {{/if}}">
+      <ul class="question-topic-list">
+        <li><a href="{{topic.url}}">{{topic.name}}</a></li>
+      </ul>
+      <div class="vote">
+        <div class="vote-sum">
+          {{post.vote 'sum'}}
+        </div>
+        <div class="vote-controls">
+          {{post.vote 'up' class='vote-up' role='button'}}
+          {{post.vote 'down' class='vote-down' role='button'}}
+        </div>
+      </div>
+      <div class="question-avatar {{#if post.author.agent}} question-avatar-agent {{/if}}">
+        <img src="{{post.author.avatar_url}}" alt="Avatar" />
+      </div>
+      <div class="question-body">
+        <h1 class="question-title">{{post.title}}</h1>
+        <div class="question-text markdown">
+          {{post.details}}
+        </div>
+        <div class="question-meta">
+          <span class="question-author">
+            {{#if post.author.url}}
+              <a href="{{post.author.url}}" target="_zendesk_lotus">
+                {{post.author.name}}
+              </a>
             {{else}}
-              <span class="status-label-{{post.status_dasherized}} status-label">{{post.status_name}}</span>
-            {{/is}}
-          </div>
-          <div class="community-follow">{{subscribe}}</div>
-        </header>
+              {{post.author.name}}
+            {{/if}}
+          </span>
+          <span class="question-published">
+            {{date post.created_at}}
+          </span>
+          <span class="question-share">
+            <span class="share-label" aria-selected="false">
+              {{t 'share'}}
+            </span>
+            {{share}}
+          </span>
+          {{! Show the post status, if any }}
+          {{#is post.status 'none'}}
+          {{else}}
+            <span class="post-{{post.status_dasherized}}">{{post.status_name}} </span>
+          {{/is}}
+        </div>
+        <div class="question-controls">
+          {{post.actions}}
+        </div>
+      </div>
+    </div>
 
-        <section class="post-info-container">
-          <div class="post-info">
-            <div class="post-author">
-              <div class="avatar post-avatar">
-                {{#if post.author.agent}}
-                  <span class="icon-agent"></span>
+    {{#each comments}}
+      {{#if official}}
+        <article class="answer clearfix" id="{{anchor}}">
+          <h2 class="answer-official-heading">{{t 'official_comment'}}</h2>
+          <div class="answer-avatar {{#if author.agent}} answer-avatar-agent {{/if}}">
+            <img src="{{author.avatar_url}}" alt="Avatar" />
+          </div>
+          <div class="answer-official-body">
+            <div class="answer-text markdown">
+              {{body}}
+            </div>
+            <div class="answer-meta">
+              <span class="answer-author">
+                {{#if author.url}}
+                  <a href="{{author.url}}" target="_zendesk_lotus">
+                    {{author.name}}
+                  </a>
+                {{else}}
+                  {{author.name}}
                 {{/if}}
-                <img src="{{post.author.avatar_url}}" alt="Avatar" class="user-avatar"/>
-              </div>
-              <div class="post-meta">
-                <span title="{{post.author.name}}">
-                  {{#link 'user_profile' id=post.author.id}}
-                    {{post.author.name}}
-                  {{/link}}
+              </span>
+              <span class="answer-published">
+                {{date created_at}}
+              </span>
+              <span class="answer-share">
+                <span class="share-label" aria-selected="false">
+                  {{t 'share'}}
                 </span>
-
-                <ul class="meta-group">
-                  {{#if post.editor}}
-                    <li class="meta-data">{{date post.edited_at timeago=true}}</li>
-                    <li class="meta-data">{{t 'edited'}}</li>
-                  {{else}}
-                    <li class="meta-data">{{date post.created_at timeago=true}}</li>
-                  {{/if}}
-                </ul>
-              </div>
-
-              {{#if post.pending}}
-                <span class="status-label status-label-pending">{{t 'pending_approval'}}</span>
-              {{/if}}
-
-              {{#with post.ticket}}
-                <a href="{{url}}" target="_zendesk_lotus" class="status-label escalation-badge">
-                  {{t 'request'}}{{id}}
-                </a>
-              {{/with}}
-            </div>
-
-
-            <div class="post-content">
-              <div class="post-body">{{post.details}}</div>
-            </div>
-          </div>
-
-          <div class="post-actions-wrapper">
-            <div class="post-vote vote" role='radiogroup'>
-              {{#with post}}
-                {{vote 'up' role='radio' class='vote-up' selected_class='vote-voted'}}
-                {{vote 'sum' class='vote-sum'}}
-                {{vote 'down' role='radio' class='vote-down' selected_class='vote-voted'}}
-              {{/with}}
-            </div>
-
-            <div class="post-actions actions">
-              {{post.actions}}
-            </div>
-          </div>
-        </section>
-
-        <footer class="post-footer">
-          <div class="post-share">{{share}}</div>
-          {{#if comments}}
-            <a href="#comment-overview" class="post-comment-count">
-              <span class="icon-comments"></span>
-              {{post.comment_count}}
-            </a>
-          {{/if}}
-        </footer>
-      </article>
-
-      <section class="comment-overview" id="comment-overview">
-          <h3 class="comment-heading">
-            {{t 'comments'}}
-          </h3>
-          <p class="comment-callout">{{t 'comments_count' count=post.comment_count}}</p>
-          {{#if comments}}
-            <div class="dropdown comment-sorter">
-              <a class="dropdown-toggle">{{t 'sort_by'}}</a>
-              <span class="dropdown-menu" role="menu">
-                {{#each comment_sorters}}
-                  <a aria-selected="{{selected}}" href="{{url}}" role="menuitem">{{name}}</a>
-                {{/each}}
+                {{share}}
               </span>
             </div>
-        {{/if}}
-      </section>
+            <div class="answer-controls">
+              {{actions}}
+            </div>
+          </div>
+        </article>
+      {{/if}}
+    {{/each}}
 
-      <ul id="comments" class="comment-list">
+    <p>{{comment_callout}}</p>
+
+    {{#form 'comment' class='answer-form'}}
+      <div class="answer-avatar">
+        {{user_avatar class='user-avatar'}}
+      </div>
+      <div class="answer-body">
+        {{wysiwyg 'body'}}
+        <div class="answer-form-controls clearfix">
+          <div class="pull-left">
+            {{checkbox 'official'}}
+            {{label 'official'}}
+          </div>
+          {{input type='submit'}}
+        </div>
+      </div>
+    {{/form}}
+
+    {{#if comments}}
+
+      {{!--
+      ** NEW COMMUNITY SNIPPET **
+      Please uncomment these lines if you want to allow your users to sort comments.
+      <div class="comment-sorter">
+        {{#each comment_sorters}}
+          <a aria-selected="{{selected}}" href="{{url}}">{{name}}</a>
+        {{/each}}
+      </div>
+      --}}
+
+      <h3 class="answer-list-heading">
+        {{t 'comments_count' count=post.comment_count}}
+      </h3>
+
+      <section class="answers">
         {{#each comments}}
-          <li id="{{anchor}}" class="comment">
-            <div class="comment-wrapper {{#if official}} comment-official {{/if}}">
-              <div class="comment-info">
-                {{#if official}}
-                  <span class="comment-official status-label status-label-official">{{t 'official_comment'}}</span>
-                {{/if}}
-
-                <div class="comment-author">
-                  <div class="avatar comment-avatar">
-                    {{#if author.agent}}
-                      <span class="icon-agent"></span>
-                    {{/if}}
-                    <img src="{{author.avatar_url}}" alt="Avatar" class="user-avatar"/>
-                  </div>
-                  <div class="comment-meta">
-                    <span title="{{author.name}}">
-                      {{#link 'user_profile' id=author.id}}
-                        {{author.name}}
-                      {{/link}}
-                    </span>
-
-                    <ul class="meta-group">
-                      {{#if editor}}
-                        <li class="meta-data">{{date edited_at timeago=true}}</li>
-                        <li class="meta-data">{{t 'edited'}}</li>
-                      {{else}}
-                        <li class="meta-data">{{date created_at timeago=true}}</li>
-                      {{/if}}
-                    </ul>
-                  </div>
-                  <div class="comment-labels">
-                    {{#with ticket}}
-                      <a href="{{url}}" target="_zendesk_lotus" class="status-label escalation-badge">
-                        {{t 'request'}} {{id}}
-                      </a>
-                    {{/with}}
-                    {{#if pending}}
-                      <span class="comment-pending status-label status-label-pending">{{t 'pending_approval'}}</span>
-                    {{/if}}
-                  </div>
+          {{#unless official}}
+            <article id="{{anchor}}" class="answer">
+              <div class="vote">
+                <div class="vote-sum">
+                  {{vote 'sum'}}
                 </div>
-
-                <section class="comment-body">{{body}}</section>
+                <div class="vote-controls">
+                  {{vote 'up' class='vote-up' role='button'}}
+                  {{vote 'down' class='vote-down' role='button'}}
+                </div>
               </div>
-
-              <div class="comment-actions-container">
-                {{#unless official}}
-                  <div class="comment-vote vote" role='radiogroup'>
-                    {{vote 'up' role='radio' class='vote-up' selected_class='vote-voted'}}
-                    {{vote 'sum' class='vote-sum'}}
-                    {{vote 'down' role='radio' class='vote-down' selected_class='vote-voted'}}
-                  </div>
-                {{/unless}}
-                <div class="comment-actions actions">
+              <div class="answer-avatar {{#if author.agent}} answer-avatar-agent {{/if}}">
+                <img alt="Avatar" src="{{author.avatar_url}}">
+              </div>
+              <div class="answer-body">
+                <div class="answer-text markdown">
+                  {{body}}
+                </div>
+                <div class="answer-meta">
+                  <span class="answer-author">
+                    {{#if author.url}}
+                      <a href="{{author.url}}" target="_zendesk_lotus">
+                        {{author.name}}
+                      </a>
+                    {{else}}
+                      {{author.name}}
+                    {{/if}}
+                  </span>
+                  <span class="answer-published">
+                    {{date created_at timeago=true}}
+                  </span>
+                  <span class="answer-votes">
+                    {{vote_sum}} {{t 'vote' count=vote_sum}}
+                  </span>
+                  <span class="answer-share">
+                    <span class="share-label" aria-selected="false">
+                      {{t 'share'}}
+                    </span>
+                    {{share}}
+                  </span>
+                </div>
+                <div class="answer-controls">
                   {{actions}}
                 </div>
               </div>
-            </div>
-          </li>
+            </article>
+          {{/unless}}
         {{/each}}
-      </ul>
-
-      {{pagination}}
-
-      <section class="post-comments">
-        {{#form 'comment' class='comment-form'}}
-          <div class="avatar comment-avatar">
-            {{user_avatar class='user-avatar'}}
-          </div>
-          <div class="comment-container">
-            {{wysiwyg 'body'}}
-            <div class="comment-form-controls">
-              {{checkbox 'official'}}
-              {{label 'official'}}
-              {{input type='submit'}}
-            </div>
-          </div>
-        {{/form}}
       </section>
 
-      <p class="comment-callout">{{comment_callout}}</p>
-    </div>
+    {{/if}}
 
-    <section class="post-sidebar">
-      <!--h3 class="sidebar-title">{{t 'suggest_new_post'}}</h3>
-      <span class="post-to-community">
-        {{link 'new_post' role='button' class='button-large'}}
-      </span-->
-      <section class="container community-footer">
-  <h4>{{t 'suggest_new_post'}}</h4>
-      <section class="section community">
-       <h3>Contactar un agente</h3>
+    {{pagination}}
 
-{{#link 'new_request'}}
-     <ul>
-        <li class="agentefontS"> <i class="fa fa-handshake-o fa-4x "></i></li></ul>
-          {{/link}}
-    </section>
-  <!--p>{{link 'new_post' role='button' class='button-large'}}</p!-->
-</section>
-    </section>
+  </div>
+
+  <div class="side-column">
   </div>
 </div>
