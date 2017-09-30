@@ -1,0 +1,111 @@
+<section class="section hero">
+  <div class="hero-inner">
+      <h1>¡Hola! ¿Cómo podemos ayudarte?</h1>
+    {{search submit=false instant=true class='search search-full'}}
+
+         {{#link 'new_request'  class="blocks-barra-link"}}
+             <h2>Contactar un agente de soporte</h2>
+          {{/link}}
+
+  </div>
+</section>
+
+<div class="container">
+  <section class="section knowledge-base">
+    <section class="categories blocks">
+      <ul class="blocks-list">
+        {{#each categories}}
+            <li class="blocks-item">
+              <a href='{{url}}' class="blocks-item-link">
+                <h4 class="blocks-item-title">{{name}}</h4>
+                <p class="blocks-item-description">{{excerpt description}}</p>
+              </a>
+            </li>
+        {{/each}}
+      </ul>
+      {{pagination}}
+    </section>
+  </section>
+
+
+  {{#if promoted_articles}}
+      <section class="articles frecuente">
+        <h2>Búsquedas frecuentes</h2>
+        <ul class="article-list frecuente-articles">
+          {{#each promoted_articles}}
+            <li class="frecuente-articles-item">
+              <a href="{{url}}">
+                {{title}}
+              </a>
+              <div class="texto frecuente-texto" >
+               <p>{{body}}</p>
+              </div>
+            </li>
+          {{/each}}
+        </ul>
+      </section>
+
+  {{else}}
+    <section class="section activity">
+    {{recent_activity}}
+  </section>
+     {{/if}}
+
+
+
+<section class="section">
+       <h2>Producto destacado</h2>
+
+<div class="carouselSection">
+<ul class="carousel">
+<li class="itemsC main-pos" id="1">  <div class="image_title">
+         <a class="none" target="_blank" href='http://tienda.mercadolibre.com.co/lanix'>Ingresa a nuestra Tienda
+</a>
+      </div><div class="slide1img img1"></div></li>
+<li class="itemsC right-pos" id="2"><div class="slide1img img2"></div></li>
+<li class="itemsC back-pos" id="3"><div class="slide1img img3"></div></li>
+<li class="itemsC back-pos" id="4"><div class="slide1img img4"></div></li>
+<li class="itemsC back-pos" id="5"><div class="slide1img img5"></div></li>
+</ul>
+  <!--span>
+  <input type="button" value="Prev" id="prev">
+  <input type="button" value="Next" id="next">
+</span-->
+     </div>
+
+
+     </section>
+
+
+
+
+  <section class="section knowledge-base">
+       <h2>Recibir Ayuda</h2>
+    <section class="categories blocks">
+      <ul class="blocks-list">
+            <li class="ayuda-item">
+                       {{#link 'community' class='blocks-ayuda-link'}}
+         <h2>{{t 'community'}}</h2>
+      {{/link}}
+               <i class="fa fa-users fa-5x "></i> <p class="blocks-ayuda-description">Preguntas y respuestas generadas por los miembros de nuestra #ComunidadLanix. ¡Participa!</p>
+                   </li>
+          <li class="ayuda-item">
+                          {{#link 'help_center' class="blocks-ayuda-link"}}
+             <h2>{{t 'knowledge_base'}}</h2>
+          {{/link}}
+               <i class="fa fa-book fa-5x "></i> <p class="blocks-ayuda-description">Colección de artículos con los mejores Tips, Consejos y Fórmulas para optimizar las características de tu equipo Lanix</p>
+                   </li>
+
+            <li class="ayuda-item">
+
+             <h2 class="blocks-ayuda-link">
+               {{#link 'new_request' class='submit-a-request'}}Contactar un agente  {{/link}}</h2>
+
+        <i class="fa fa-handshake-o fa-5x ">
+                                          </i> <p class="blocks-ayuda-description">¿Necesitas ayuda con tu inquietud? Completa el formulario para ser atendido por un agente de soporte.</p>
+                   </li>
+      </ul>
+      </section>
+    </section>
+
+</div>
