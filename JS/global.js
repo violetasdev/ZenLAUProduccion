@@ -4,6 +4,17 @@
 
 $(document).ready(function() {
 
+  var oldIds = ["115000039346", "210635986","214931726","115005005626","208565406"];
+  var newIds = ["115004997463", "115005005686","115005005626","115005016826","115005030106"];
+
+  for (var i = 0; i < oldIds.length; i++){
+    if (window.location.href.indexOf(oldIds[i]) > -1) {
+      window.location.href = 'https://soporte.lanix.co/hc/es/articles/' + newIds[i];
+    }
+  }
+
+
+
   var txt =document.getElementsByClassName('texto');
   for (var i = 0, len = txt.length; i < len; i++) {
    var texto=txt[i].innerHTML;
@@ -18,7 +29,7 @@ $(document).ready(function() {
 
     for (var i = 0, len = catItems.length; i < len; i++) {
 
-        var string ='//p4.zdassets.com/hc/theme_assets/2025662/115000009683/'+(catItems[i].id).replace(new RegExp(' ', 'g'), '_')+'.png';
+        var string ='//p4.zdassets.com/hc/theme_assets/598858/200073509/'+(catItems[i].id).replace(new RegExp(' ', 'g'), '_')+'.png';
    catItems[i].style.backgroundImage = "url('" + string + "')";
 catItems[i].src = string;
 
