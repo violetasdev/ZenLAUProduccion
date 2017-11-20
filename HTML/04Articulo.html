@@ -1,244 +1,302 @@
 {{#is section.name 'Especificaciones y Características'}}
 <section class="section catMovil" style=" background-image: url(
-     {{#each attachments}}
+        {{#each attachments}}
 {{url}}
-        {{/each}}
+           {{/each}}
 );">
 
 </section>
 <div class="container">
-<nav class="sub-nav">
- {{breadcrumbs}}
-</nav>
- <article class="articleCatalogo">
-   <header class="article-header">
-     <h1 title="{{article.title}}" class="article-title">
-       {{article.title}}
-       {{#if article.internal}}
-         <span class="icon-lock" title="{{t 'internal'}}"></span>
-       {{/if}}
-     </h1>
-   </header>
+  <nav class="sub-nav">
+    {{breadcrumbs}}
+  </nav>
+    <article class="articleCatalogo">
+      <header class="article-header">
+        <h1 title="{{article.title}}" class="article-title">
+          {{article.title}}
+          {{#if article.internal}}
+            <span class="icon-lock" title="{{t 'internal'}}"></span>
+          {{/if}}
+        </h1>
+      </header>
 
-   <section class="article-info">
-     <div class="article-content">
-       <div class="article-body">{{article.body}}</div>
-     </div>
-   </section>
+      <section class="article-info">
+        <div class="article-content">
+          <div class="article-body">{{article.body}}</div>
+        </div>
+      </section>
 
-   <footer>
-   <section class="article-relatives">
-     {{related_articles}}
-   </section>
-   </footer>
- </article>
+      <footer>
+      <section class="article-relatives">
+        {{related_articles}}
+      </section>
+      </footer>
+    </article>
+    
+  {{else}}
 
+{{!-- Begin Meta Tags and Structured Data info for All articles, except Product Specifications --}}
+<meta name="title" content="{{article.title}}">
+<meta name="author" content="{{article.author.name}}">
+<meta name="description" content="{{excerpt article.body characters=150}}">
 
-{{else}}
- <div class="container-divider"></div>
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{article.title}}">
+<meta property="og:description" content="{{excerpt article.body characters=150}}">
+<meta property="og:url" content="http://soporte.lanix.co{{help_center.url}}">
+<meta property="og:site_name" content="Lanix Atención a Usuarios">
+<meta property="og:image" content="https://p4.zdassets.com/hc/theme_assets/2025662/115000009683/Lanix_Logo150px.png">
+
+<meta name="twitter:description" content="{{excerpt article.body characters=110}}">
+<meta name="twitter:image" content="https:{{logo_url}}">
+
+<script type='application/ld+json'>
+{
+	"@context": "http://schema.org/",
+	"@type": "TechArticle",
+	"url": "https://soporte.lanix.co/hc/es/articles{{article.url}}",
+	"name": "{{article.title}}",
+	"headline": "{{article.title}}",
+	"articleSection": "{{section.name}}",
+	"author" : {
+		"@type" : "Person",
+		"name" : "{{article.author.name}}"},
+  	"publisher" : {
+		"@type" : "Organization",
+		"name" : "Lanix Colombia"},
+	"contentRating": "{{article.upvote_count}} de {{article.vote_count}}",
+	"dateCreated": "{{article.created_at}}",
+	"datePublished": "{{article.created_at}}",
+	"dateModified": "{{article.updated_at}}",
+	"description": "{{excerpt article.body characters=150}}",
+	"articleBody": "{{excerpt article.body characters=300}}",
+  {{#if article.labels~}}
+  	"keywords": "
+  	{{~#each article.labels}}{{identifier}} {{/each}}",  
+  {{~else~}}
+  	"keywords": "lanix",
+  {{~/if}}
+  {{#if attachments~}}
+  	{{~#each attachments~}}
+  		{{!-- when able to identify attachment type Modify #is to
+      									"image": "https://soporte.lanx.co{{url}}"--}}
+  		{{~#is @index 0~}}
+  			"image": "https://p4.zdassets.com/hc/theme_assets/2025662/115000009683/Lanix_Logo150px.png"
+  		{{~/is~}}
+  	{{~/each}}
+  {{~else~}}
+  {{!-- when able to identify attachment type Modify #is to
+      									"image": "https://soporte.lanx.co{{url}}"--}}
+  "image": "https://p4.zdassets.com/hc/theme_assets/2025662/115000009683/Lanix_Logo150px.png"
+  {{~/if}}
+}
+</script>
+{{!-- End Meta Tags and Strcutured Data for All articles excpet Prodcut and specifications --}}
+  
+  <div class="container-divider"></div>
 <div class="container">
-<nav class="sub-nav">
- {{breadcrumbs}}
- {{search scoped=true submit=false}}
-</nav>
+  <nav class="sub-nav">
+    {{breadcrumbs}}
+    {{search scoped=true submit=false}}
+  </nav>
+  
+  
+      <article class="article">
+      <header class="article-header">
+        <h1 title="{{article.title}}" class="article-title">
+          {{article.title}}
+          {{#if article.internal}}
+            <span class="icon-lock" title="{{t 'internal'}}"></span>
+          {{/if}}
+        </h1>
 
+        <div class="article-author">
+          <div class="avatar article-avatar">
+            {{#if article.author.agent}}
+              <span class="icon-agent"></span>
+            {{/if}}
+            <img src="{{article.author.avatar_url}}" alt="Avatar" class="user-avatar"/>
+          </div>
+          <div class="article-meta">
+            {{#link 'user_profile' id=article.author.id}}
+              {{article.author.name}}
+            {{/link}}
 
-   <article class="article">
-   <header class="article-header">
-     <h1 title="{{article.title}}" class="article-title">
-       {{article.title}}
-       {{#if article.internal}}
-         <span class="icon-lock" title="{{t 'internal'}}"></span>
-       {{/if}}
-     </h1>
+            <ul class="meta-group">
+             
+                <li class="meta-data">{{date article.created_at timeago=false}}</li>
+             <li class="meta-data">{{t 'updated'}} {{date article.updated_at timeago=true}}</li>
+            </ul>
+          </div>
+        </div>
+        {{subscribe}}
+      </header>
 
-     <div class="article-author">
-       <div class="avatar article-avatar">
-         {{#if article.author.agent}}
-           <span class="icon-agent"></span>
-         {{/if}}
-         <img src="{{article.author.avatar_url}}" alt="Avatar" class="user-avatar"/>
-       </div>
-       <div class="article-meta">
-         {{#link 'user_profile' id=article.author.id}}
-           {{article.author.name}}
-         {{/link}}
+      <section class="article-info">
+        <div class="article-content">
+          <div class="article-body">{{article.body}}</div>
 
-         <ul class="meta-group">
+          <div class="article-attachments">
+            <ul class="attachments">
+              {{#each attachments}}
+                <li class="attachment-item">
+                  <a href="{{url}}" target="_blank">{{name}}</a>
+                  <div class="attachment-meta meta-group">
+                    <span class="attachment-meta-item meta-data">{{size}}</span>
+                    <a href="{{url}}" target="_blank" class="attachment-meta-item meta-data">Download</a>
+                  </div>
+                </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+      </section>
 
-             <li class="meta-data">{{date article.created_at timeago=false}}</li>
-          <li class="meta-data">{{t 'updated'}} {{date article.updated_at timeago=true}}</li>
-         </ul>
-       </div>
-     </div>
-     {{subscribe}}
-   </header>
+      <footer>
+        <div class="article-footer">
+          <div class="article-share">{{share}}</div>
+          {{#if comments}}
+            <!--a href="#article-comments" class="article-comment-count">
+              <span class="icon-comments"></span>
+              {{article.comment_count}}
+            </a-->
+          {{/if}}
+        </div>
+        {{#with article}}
+          <div class="article-votes">
+            <span class="article-votes-question">{{t 'was_this_article_helpful'}}</span>
+            <div class="article-votes-controls" role='radiogroup'>
+              {{vote 'up' role='radio' class='button article-vote article-vote-up'}}
+              {{vote 'down' role='radio' class='button article-vote article-vote-down'}}
+            </div>
+            <small class="article-votes-count">
+              {{vote 'label' class='article-vote-label'}}
+            </small>
+          </div>
+        {{/with}}
 
-   <section class="article-info">
-     <div class="article-content">
-       <div class="article-body">{{article.body}}</div>
-
-       <div class="article-attachments">
-         <ul class="attachments">
-           {{#each attachments}}
-             <li class="attachment-item">
-               <a href="{{url}}" target="_blank">{{name}}</a>
-               <div class="attachment-meta meta-group">
-                 <span class="attachment-meta-item meta-data">{{size}}</span>
-                 <a href="{{url}}" target="_blank" class="attachment-meta-item meta-data">Download</a>
-               </div>
-             </li>
-           {{/each}}
-         </ul>
-       </div>
-     </div>
-   </section>
-
-   <footer>
-     <div class="article-footer">
-       <div class="article-share">{{share}}</div>
-       {{#if comments}}
-         <!--a href="#article-comments" class="article-comment-count">
-           <span class="icon-comments"></span>
-           {{article.comment_count}}
-         </a-->
-       {{/if}}
-     </div>
-     {{#with article}}
-       <div class="article-votes">
-         <span class="article-votes-question">{{t 'was_this_article_helpful'}}</span>
-         <div class="article-votes-controls" role='radiogroup'>
-           {{vote 'up' role='radio' class='button article-vote article-vote-up'}}
-           {{vote 'down' role='radio' class='button article-vote article-vote-down'}}
-         </div>
-         <small class="article-votes-count">
-           {{vote 'label' class='article-vote-label'}}
-         </small>
-       </div>
-     {{/with}}
-
-     <!--div class="article-more-questions">
-       {{request_callout}}
-     </div-->
-
-   <section id="agente" class="container community agenteColor">
-<h4>¿No encontraste lo que buscabas?</h4>
-   <section class="section community">
-    <h3>Contactar un agente</h3>
+        <!--div class="article-more-questions">
+          {{request_callout}}
+        </div-->
+         
+      <section id="agente" class="container community agenteColor">
+  <h4>¿No encontraste lo que buscabas?</h4>
+      <section class="section community">
+       <h3>Contactar un agente</h3>
 {{#link 'new_request'}}
-  <ul>
-     <li class="agentefontS"> <i class="fa fa-handshake-o fa-4x "></i></li></ul>
-       {{/link}}
- </section>
+     <ul>
+        <li class="agentefontS"> <i class="fa fa-handshake-o fa-4x "></i></li></ul>
+          {{/link}}
+    </section>
 
- </section>
-     <div class="article-return-to-top">
-       <a href="#article-container">{{t 'return_to_top'}}<span class="icon-arrow-up"></span></a>
-     </div>
-   </footer>
+    </section>
+        <div class="article-return-to-top">
+          <a href="#article-container">{{t 'return_to_top'}}<span class="icon-arrow-up"></span></a>
+        </div>
+      </footer>
 
-   <section class="article-relatives">
-     {{recent_articles}}
-     {{related_articles}}
-   </section>
-   <!--div class="article-comments" id="article-comments">
-     <section class="comments">
-       <header class="comment-overview">
-         <h3 class="comment-heading">
-           {{t 'comments'}}
-         </h3>
-         <p class="comment-callout">{{t 'comments_count' count=article.comment_count}}</p>
-         {{#if comments}}
-           <div class="dropdown comment-sorter">
-             <a class="dropdown-toggle">{{t 'sort_by'}}</a>
-             <span class="dropdown-menu" role="menu">
-               {{#each comment_sorters}}
-                 <a aria-selected="{{selected}}" href="{{url}}" role="menuitem">{{name}}</a>
-               {{/each}}
-             </span>
-           </div>
-         {{/if}}
-       </header>
+      <section class="article-relatives">
+        {{recent_articles}}
+        {{related_articles}}
+      </section>
+      <!--div class="article-comments" id="article-comments">
+        <section class="comments">
+          <header class="comment-overview">
+            <h3 class="comment-heading">
+              {{t 'comments'}}
+            </h3>
+            <p class="comment-callout">{{t 'comments_count' count=article.comment_count}}</p>
+            {{#if comments}}
+              <div class="dropdown comment-sorter">
+                <a class="dropdown-toggle">{{t 'sort_by'}}</a>
+                <span class="dropdown-menu" role="menu">
+                  {{#each comment_sorters}}
+                    <a aria-selected="{{selected}}" href="{{url}}" role="menuitem">{{name}}</a>
+                  {{/each}}
+                </span>
+              </div>
+            {{/if}}
+          </header>
 
-       <ul id="comments" class="comment-list">
-         {{#each comments}}
-           <li id="{{anchor}}" class="comment">
-             <div class="comment-wrapper">
-               <div class="comment-info">
-                 <div class="comment-author">
-                   <div class="avatar comment-avatar">
-                     {{#if author.agent}}
-                       <span class="icon-agent"></span>
-                     {{/if}}
-                     <img src="{{author.avatar_url}}" alt="Avatar" class="user-avatar"/>
-                   </div>
-                   <div class="comment-meta">
-                     <span title="{{author.name}}">
-                       {{#link 'user_profile' id=author.id}}
-                         {{author.name}}
-                       {{/link}}
-                     </span>
+          <ul id="comments" class="comment-list">
+            {{#each comments}}
+              <li id="{{anchor}}" class="comment">
+                <div class="comment-wrapper">
+                  <div class="comment-info">
+                    <div class="comment-author">
+                      <div class="avatar comment-avatar">
+                        {{#if author.agent}}
+                          <span class="icon-agent"></span>
+                        {{/if}}
+                        <img src="{{author.avatar_url}}" alt="Avatar" class="user-avatar"/>
+                      </div>
+                      <div class="comment-meta">
+                        <span title="{{author.name}}">
+                          {{#link 'user_profile' id=author.id}}
+                            {{author.name}}
+                          {{/link}}
+                        </span>
 
-                     <ul class="meta-group">
-                       {{#if editor}}
-                         <li class="meta-data">{{date edited_at timeago=true}}</li>
-                         <li class="meta-data">{{t 'edited'}}</li>
-                       {{else}}
-                         <li class="meta-data">{{date created_at timeago=true}}</li>
-                       {{/if}}
-                     </ul>
-                   </div>
-                   <div class="comment-labels">
-                     {{#with ticket}}
-                       <a href="{{url}}" target="_zendesk_lotus" class="status-label escalation-badge">
-                         {{t 'request'}}{{id}}
-                       </a>
-                     {{/with}}
-                     {{#if pending}}
-                       <span class="comment-pending status-label status-label-pending">{{t 'pending_approval'}}</span>
-                     {{/if}}
-                   </div>
-                 </div>
+                        <ul class="meta-group">
+                          {{#if editor}}
+                            <li class="meta-data">{{date edited_at timeago=true}}</li>
+                            <li class="meta-data">{{t 'edited'}}</li>
+                          {{else}}
+                            <li class="meta-data">{{date created_at timeago=true}}</li>
+                          {{/if}}
+                        </ul>
+                      </div>
+                      <div class="comment-labels">
+                        {{#with ticket}}
+                          <a href="{{url}}" target="_zendesk_lotus" class="status-label escalation-badge">
+                            {{t 'request'}}{{id}}
+                          </a>
+                        {{/with}}
+                        {{#if pending}}
+                          <span class="comment-pending status-label status-label-pending">{{t 'pending_approval'}}</span>
+                        {{/if}}
+                      </div>
+                    </div>
 
-                 <section class="comment-body">{{body}}</section>
-               </div>
+                    <section class="comment-body">{{body}}</section>
+                  </div>
 
-               <div class="comment-actions-container">
-                 <div class="comment-vote vote" role='radiogroup'>
-                   {{vote 'up' role='radio' class='vote-up' selected_class='vote-voted'}}
-                   {{vote 'sum' class='vote-sum'}}
-                   {{vote 'down' role='radio' class='vote-down' selected_class='vote-voted'}}
-                 </div>
-                 <div class="comment-actions actions">
-                   {{actions}}
-                 </div>
-               </div>
-             </div>
-           </li>
-         {{/each}}
-       </ul>
+                  <div class="comment-actions-container">
+                    <div class="comment-vote vote" role='radiogroup'>
+                      {{vote 'up' role='radio' class='vote-up' selected_class='vote-voted'}}
+                      {{vote 'sum' class='vote-sum'}}
+                      {{vote 'down' role='radio' class='vote-down' selected_class='vote-voted'}}
+                    </div>
+                    <div class="comment-actions actions">
+                      {{actions}}
+                    </div>
+                  </div>
+                </div>
+              </li>
+            {{/each}}
+          </ul>
 
-       {{pagination}}
+          {{pagination}}
 <p>
-       {{#form 'comment' class='comment-form'}}
-         <div class="avatar comment-avatar">
-           {{user_avatar class='user-avatar'}}
-         </div>
-         <div class="comment-container">
-           {{wysiwyg 'body'}}
-           <div class="comment-form-controls">
-             {{input type='submit'}}
-           </div>
-         </div>
-       {{/form}}
+          {{#form 'comment' class='comment-form'}}
+            <div class="avatar comment-avatar">
+              {{user_avatar class='user-avatar'}}
+            </div>
+            <div class="comment-container">
+              {{wysiwyg 'body'}}
+              <div class="comment-form-controls">
+                {{input type='submit'}}
+              </div>
+            </div>
+          {{/form}}
 
-       <p class="comment-callout">{{comment_callout}}</p>
-     </section>
-   </div!-->
- </article>
+          <p class="comment-callout">{{comment_callout}}</p>
+        </section>
+      </div!-->
+    </article>
+  
 
-
-
- {{/is}}
-</div>
+  
+    {{/is}}
+  </div>
 </div>
