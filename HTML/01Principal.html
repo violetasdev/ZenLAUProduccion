@@ -1,8 +1,24 @@
+<meta name="title" content="Lanix Atención a Usuarios">
+<meta name="author" content="Lanix Colombia">
+<meta name="description" content="Encuentra ayuda en línea, guías de funcionalidad, drivers, especificaciones y características, centros de soporte y más contenido para sacarle el máximo provecho a tus dispositivos Lanix: Celulares, Tablets y Computadores.">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lanix Atención a Usuarios">
+<meta property="og:description" content="Encuentra ayuda en línea, guías de funcionalidad, drivers, especificaciones y características, centros de soporte y más contenido para sacarle el máximo provecho a tus dispositivos Lanix: Celulares, Tablets y Computadores.">
+<meta property="og:url" content="http://soporte.lanix.co{{help_center.url}}">
+<meta property="og:site_name" content="Lanix Atención a Usuarios">
+{{!-- Change Logo URL for the METa Tag below when uploading to production site, ideally using Curlybars --}}
+<meta property="og:image" content="https://p4.zdassets.com/hc/theme_assets/2025662/115000009683/Lanix_Logo150px.png">
+
+<meta name="twitter:description" content="Ayuda en línea, guías de funcionalidad, drivers, características y soporte para tu Lanix.">
+{{!-- Change Logo URL for the METa Tag below when uploading to production site, ideally using Curlybars --}}
+<meta name="twitter:image" content="https://p4.zdassets.com/hc/theme_assets/2025662/115000009683/Lanix_Logo150px.png">
+
 <section class="section hero">
   <div class="hero-inner">
       <h1>¡Hola! ¿Cómo podemos ayudarte?</h1>
     {{search submit=false instant=true class='search search-full'}}
-
+    
          {{#link 'new_request'  class="blocks-barra-link"}}
              <h2>Contactar un agente de soporte</h2>
           {{/link}}
@@ -23,7 +39,7 @@
         {{/each}}
       </ul>
       {{pagination}}
-      <p class="index-description">Encuentra ayuda en línea, guías de funcionalidad, drivers, especificaciones y características, centros de soporte y más contenido para sacarle el máximo provecho a tus dispositivos Lanix: Celulares, Tablets y Computadoras</p>
+      <p class="index-description">Encuentra ayuda en línea, guías de funcionalidad, drivers, especificaciones y características, centros de soporte y más contenido para sacarle el máximo provecho a tus dispositivos Lanix: Celulares, Tablets y Computadores</p>
     </section>
   </section>
 
@@ -31,7 +47,7 @@
   {{#if promoted_articles}}
       <section class="articles frecuente">
         <h2>Búsquedas frecuentes</h2>
-
+        
         <ul class="article-list frecuente-articles">
           {{#each promoted_articles}}
             <li class="frecuente-articles-item">
@@ -51,9 +67,9 @@
     {{recent_activity}}
   </section>
      {{/if}}
+  
 
-
-
+  
 <section class="section">
        <!--h2>Producto destacado</h2-->
 
@@ -78,31 +94,36 @@
   <input type="button" value="Prev" id="prev">
   <input type="button" value="Next" id="next">
 </span-->
-     </div>
+     </div>   
+
+  
      </section>
+      
+  
+  
 
   <section class="section knowledge-base">
        <h2>Recibir Ayuda</h2>
     <section class="categories blocks">
       <ul class="blocks-list">
             <li class="ayuda-item">
-
+                       
          <h2 class="blocks-ayuda-link-titulo">{{t 'community'}}</h2>
-
+      
                {{#link 'community' class='blocks-ayuda-link'}}<i class="fa fa-users fa-5x "></i> {{/link}}<p class="blocks-ayuda-description">Preguntas y respuestas generadas por los miembros de nuestra #ComunidadLanix. ¡Participa!</p>
                    </li>
           <li class="ayuda-item">
-
+                          
              <h2 class="blocks-ayuda-link-titulo">{{t 'knowledge_base'}}</h2>
-
+    
                {{#link 'help_center' class="blocks-ayuda-link"}}<i class="fa fa-book fa-5x "></i>       {{/link}}<p class="blocks-ayuda-description">Colección de artículos con los mejores Tips, Consejos y Fórmulas para optimizar las características de tu equipo Lanix</p>
                    </li>
-
+        
             <li class="ayuda-item">
-
+        
              <h2 class="blocks-ayuda-link-titulo">
               Contactar un agente  </h2>
-
+            
          {{#link 'new_request' class='blocks-ayuda-link'}}
          <i class="fa fa-handshake-o fa-5x ">                                         </i> {{/link}}<p class="blocks-ayuda-description">¿Necesitas ayuda con tu inquietud? Completa el formulario para ser atendido por un agente de soporte.</p>
                    </li>
