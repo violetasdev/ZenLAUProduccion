@@ -4,8 +4,8 @@
 
 $(document).ready(function() {
 
-  var oldIds = ["115000039346", "210635986","214931726","115005005626","208565406"];
-  var newIds = ["115004997463", "115005005686","115005005626","115005016826","115005030106"];
+  var oldIds = ["115000039346", "210635986","214931726","208565406","212264663","214950423","210050986","251122663","115000158983"];
+  var newIds = ["115004997463", "115005005686","115005005626","115005030106","115005005626","115005016826","115005050403","115005016826","115005016826"];
 
   for (var i = 0; i < oldIds.length; i++){
     if (window.location.href.indexOf(oldIds[i]) > -1) {
@@ -24,12 +24,11 @@ $(document).ready(function() {
 
 }
 
-
    var catItems=document.getElementsByClassName('catalogoItem');
 
     for (var i = 0, len = catItems.length; i < len; i++) {
 
-        var string ='//p4.zdassets.com/hc/theme_assets/598858/200073509/'+(catItems[i].id).replace(new RegExp(' ', 'g'), '_')+'.png';
+        var string ='//p4.zdassets.com/hc/theme_assets/598858/200073509/'+(catItems[i].id).replace(new RegExp(' ', 'g'), '_')+'.jpg';
    catItems[i].style.backgroundImage = "url('" + string + "')";
 catItems[i].src = string;
 
