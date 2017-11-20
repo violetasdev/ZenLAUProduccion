@@ -1,38 +1,113 @@
-<section class="clearfix">
-  <div class="knowledge-base">
-    <h1></h1>
-    <div id="categoryList">
-      <ul class="category-list">
-        {{#each categories}}
-          <li><a href="{{url}}">{{name}}</a></li>
-        {{/each}}
+<section class="section hero">
+  <div class="hero-inner">
+      <h1>¡Hola! ¿Cómo podemos ayudarte?</h1>
+    {{search submit=false instant=true class='search search-full'}}
 
-        {{pagination}}
-      </ul>
-    </div>
-  </div>
-  {{#if promoted_articles}}
-    <section class="promoted-articles">
-      <h3>{{t 'promoted_articles'}}</h3>
-      <ul>
-        {{#each promoted_articles}}
-          <li>
-            <a href="{{url}}">{{title}}</a>
-          </li>
-        {{/each}}
-      </ul>
-    </section>
-  {{/if}}
-  {{recent_articles}}
-  <div class="community">
-    {{trending_questions_list}}
-    {{#if help_center.community_enabled}}
-      <h4>
-        {{t 'community'}}
-        {{#link 'community'}}
-          {{t 'browse'}}
-        {{/link}}
-      </h4>
-    {{/if}}
+         {{#link 'new_request'  class="blocks-barra-link"}}
+             <h2>Contactar un agente de soporte</h2>
+          {{/link}}
   </div>
 </section>
+
+<div class="container">
+  <section class="section knowledge-base">
+    <section class="categories blocks">
+      <ul class="blocks-list">
+        {{#each categories}}
+            <li class="blocks-item">
+              <a href='{{url}}' class="blocks-item-link">
+                <h4 class="blocks-item-title">{{name}}</h4>
+                <!--p class="blocks-item-description">{{excerpt description}}</p-->
+              </a>
+            </li>
+        {{/each}}
+      </ul>
+      {{pagination}}
+      <p class="index-description">Encuentra ayuda en línea, guías de funcionalidad, drivers, especificaciones y características, centros de soporte y más contenido para sacarle el máximo provecho a tus dispositivos Lanix: Celulares, Tablets y Computadoras</p>
+    </section>
+  </section>
+
+
+  {{#if promoted_articles}}
+      <section class="articles frecuente">
+        <h2>Búsquedas frecuentes</h2>
+
+        <ul class="article-list frecuente-articles">
+          {{#each promoted_articles}}
+            <li class="frecuente-articles-item">
+              <a href="{{url}}">
+                {{title}}
+              </a>
+              <div class="texto frecuente-textoSeccion" >
+               <p>{{body}}</p>
+              </div>
+            </li>
+          {{/each}}
+        </ul>
+      </section>
+
+  {{else}}
+    <section class="section activity">
+    {{recent_activity}}
+  </section>
+     {{/if}}
+
+
+
+<section class="section">
+       <!--h2>Producto destacado</h2-->
+
+<div class="carouselSection">
+<ul class="carousel">
+<li class="itemsC main-pos" id="1"><div class="slide1img img1"></div></li>
+<li class="itemsC right-pos" id="2"><div class="image_title">
+         <a class="none" target="_blank" href='https://articulo.mercadolibre.com.co/MCO-447439453-lanix-neuron-v-16p-computador-portatil-ssd-36m-garantia-_JM'>Ingresa a nuestra Tienda
+</a>
+      </div><div class="slide1img img2"></div></li>
+<li class="itemsC back-pos" id="3"><div class="image_title">
+         <a class="none" target="_blank" href='https://articulo.mercadolibre.com.co/MCO-450467682-lanix-neuron-a-x16p-computador-portatil-ssd-36m-garantia-_JM'>Ingresa a nuestra Tienda
+</a>
+      </div><div class="slide1img img3"></div></li>
+<li class="itemsC back-pos" id="4">  <div class="image_title">
+         <a class="none" target="_blank" href='https://articulo.mercadolibre.com.co/MCO-447439840-lanix-neuron-g6x16i3-computador-portatil-ssd-36m-garantia-_JM'>Ingresa a nuestra Tienda
+</a>
+      </div><div class="slide1img img4"></div></li>
+<li class="itemsC back-pos" id="5"><div class="slide1img img5"></div></li>
+</ul>
+  <!--span>
+  <input type="button" value="Prev" id="prev">
+  <input type="button" value="Next" id="next">
+</span-->
+     </div>
+     </section>
+
+  <section class="section knowledge-base">
+       <h2>Recibir Ayuda</h2>
+    <section class="categories blocks">
+      <ul class="blocks-list">
+            <li class="ayuda-item">
+
+         <h2 class="blocks-ayuda-link-titulo">{{t 'community'}}</h2>
+
+               {{#link 'community' class='blocks-ayuda-link'}}<i class="fa fa-users fa-5x "></i> {{/link}}<p class="blocks-ayuda-description">Preguntas y respuestas generadas por los miembros de nuestra #ComunidadLanix. ¡Participa!</p>
+                   </li>
+          <li class="ayuda-item">
+
+             <h2 class="blocks-ayuda-link-titulo">{{t 'knowledge_base'}}</h2>
+
+               {{#link 'help_center' class="blocks-ayuda-link"}}<i class="fa fa-book fa-5x "></i>       {{/link}}<p class="blocks-ayuda-description">Colección de artículos con los mejores Tips, Consejos y Fórmulas para optimizar las características de tu equipo Lanix</p>
+                   </li>
+
+            <li class="ayuda-item">
+
+             <h2 class="blocks-ayuda-link-titulo">
+              Contactar un agente  </h2>
+
+         {{#link 'new_request' class='blocks-ayuda-link'}}
+         <i class="fa fa-handshake-o fa-5x ">                                         </i> {{/link}}<p class="blocks-ayuda-description">¿Necesitas ayuda con tu inquietud? Completa el formulario para ser atendido por un agente de soporte.</p>
+                   </li>
+      </ul>
+      </section>
+    </section>
+
+</div>

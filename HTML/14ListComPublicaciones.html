@@ -1,24 +1,34 @@
-<nav class="sub-nav clearfix">
-  <h4 class="community-heading">
-    {{t 'community'}}
-  </h4>
-  {{search}}
-</nav>
+<section class="section hero community-hero">
+  <div class="hero-inner">
+    {{search submit=false class='search search-full' scoped=true}}
+  </div>
+</section>
 
-<nav class="community-nav">
-  <ul>
-    <li>{{link 'topics'}}</li>
-    <li>{{t 'posts'}}</li>
-    <li>{{link 'new_post' role='button'}}</li>
-  </ul>
-</nav>
+<div class="container">
+  <nav class="sub-nav">
+    {{breadcrumbs}}
+  </nav>
 
-<div class="clearfix">
-  <div class="main-column">
+  <header class="page-header community-header">
+    <span class="dropdown">
+      <span class="dropdown-toggle">
+        <h4>{{t 'all_posts'}}</h4>
+      </span>
+      <span class="dropdown-menu" role="menu">
+        {{#link 'topics' role='menuitem'}}
+          {{t 'show_topics'}}
+        {{/link}}
+        {{#link 'posts' role='menuitem' selected='true'}}
+          {{t 'show_all_posts'}}
+        {{/link}}
+      </span>
+    </span>
+    <!--span class="post-to-community">
+      {{link 'new_post' role='button' class='button-large'}}
+    </span-->
+  </header>
 
-    {{!--
-    ** NEW COMMUNITY SNIPPET **
-    Please uncomment these lines if you want to allow your users to filter posts by status
+  <div class="topic-header">
     <span class="topic-filters">
       <span class="dropdown">
         <span class="dropdown-toggle">
@@ -32,65 +42,105 @@
           {{/each}}
         </span>
       </span>
-    </span>
-    --}}
-
-    <nav class="community-sub-nav">
-      <ul>
-        {{#each sorters}}
-          <li>
-            {{#if selected}}
+      <span class="dropdown">
+        <span class="dropdown-toggle">
+          {{current_sorter.label}}
+        </span>
+        <span class="dropdown-menu" role="menu">
+          {{#each sorters}}
+            <a href="{{url}}" aria-selected="{{selected}}" role="menuitem">
               {{name}}
-            {{else}}
-              <a href="{{url}}">
-                {{name}}
-              </a>
-            {{/if}}
-          </li>
-        {{/each}}
-      </ul>
-    </nav>
+            </a>
+          {{/each}}
+        </span>
+      </span>
+    </span>
+  </div>
 
-    {{#if posts}}
-      <ul class="question-list">
-        {{#each posts}}
-          <li class="question {{#if has_official_comment}} question-official-answer {{/if}} {{#if featured}} post-featured {{/if}} {{#if pinned}} post-pinned {{/if}}">
-            <h3 class="question-title">
-              <a href="{{url}}">{{title}}</a>
-            </h3>
-            <div class="question-meta">
-              <span class="question-author">
-                {{#if author.url}}
-                  <a href="{{author.url}}" target="_zendesk_lotus">
-                    {{author.name}}
-                  </a>
-                {{else}}
-                  {{author.name}}
-                {{/if}}
-              </span>
-              <span class="question-published">
-                {{date created_at timeago=true}}
-              </span>
-              <span class="question-votes">
-                {{vote_sum}} {{t 'vote' count=vote_sum}}
-              </span>
-              <span class="question-answers">
-                {{comment_count}} {{t 'comment' count=comment_count}}
-              </span>
-              {{! Show the post status, if any }}
+  <ul class="posts-list striped-list">
+    {{#unless posts}}
+      <div class="no-posts-with-filter">
+        {{t 'no_posts_with_filter'}}
+      </div>
+    {{/unless}}
+    {{#each posts}}
+      <li>
+        <div class="striped-list-item {{#if featured}}post-featured{{/if}}">
+          <span class="striped-list-info">
+            <a href="{{url}}" title="{{title}}" class="striped-list-title">{{title}}</a>
+            <span class="post-overview-item">
+              {{#if pinned}}
+                <span class="status-label status-label-pinned">{{t 'pinned'}}</span>
+              {{/if}}
+
+              {{#if featured}}
+                <span class="status-label status-label-featured">{{t 'featured'}}</span>
+              {{/if}}
+
               {{#is status 'none'}}
               {{else}}
-                <span class="post-{{status_dasherized}}">{{status_name}} </span>
+                <span class="status-label-{{status_dasherized}} status-label striped-list-status">{{status_name}}</span>
               {{/is}}
-            </div>
+            </span>
+
+            <ul class="meta-group">
+              <li class="meta-data">{{author.name}}</li>
+              {{#if editor}}
+                <li class="meta-data">{{date edited_at timeago=true}}</li>
+                <li class="meta-data">{{t 'edited'}}</li>
+              {{else}}
+                <li class="meta-data">{{date created_at timeago=true}}</li>
+              {{/if}}
+            </ul>
+          </span>
+
+          <div class="post-overview-count striped-list-count">
+            <span class="striped-list-count-item">
+              <span class="striped-list-number">{{vote_sum}}</span>
+              {{t 'vote' count=vote_sum}}
+            </span>
+            <span class="striped-list-count-item">
+              <span class="striped-list-number">{{comment_count}}</span>
+              {{t 'comment' count=comment_count}}
+            </span>
+          </div>
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+
+  {{pagination}}
+
+  {{#if featured_posts}}
+    <section class="section community-featured-posts">
+      <h3>{{t 'featured_posts'}}</h3>
+      <ul class="promoted-articles">
+        {{#each featured_posts}}
+          <li class="promoted-articles-item">
+            <a href="{{url}}">
+              {{title}}
+            </a>
           </li>
         {{/each}}
       </ul>
-    {{else}}
-      <p>{{t 'no_content'}}</p>
+    </section>
+  {{/if}}
+
+  <section class="community-activity activity">
+    {{#if help_center.community_enabled}}
+      {{recent_activity scope='community'}}
     {{/if}}
+  </section>
 
-    {{pagination}}
+  <section class="container community-footer">
+    <h4>{{t 'suggest_new_post'}}</h4>
+          <section class="section community">
+       <h3>Contactar un agente</h3>
 
-  </div>
+{{#link 'new_request'}}
+     <ul>
+        <li class="agentefont"> <i class="fa fa-handshake-o fa-4x "></i></li></ul>
+          {{/link}}
+    </section>
+  </section>
 </div>

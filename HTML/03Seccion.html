@@ -1,30 +1,108 @@
-<nav class="sub-nav clearfix category-breadcrumbs">
+<!--div class="section-container">
+  <section class="section-content">
+    <header class="page-header">
+    </header>
+  </section>
+</div-->
+
+{{#is section.name 'Especificaciones y Características'}}
+
+<section class="section herocatalogo">
+<div class="herocatalogo-inner">
+    <h1>Explora las características de tu Lanix</h1>
+</div>
+</section>
+
+
+<div class="container">
+<nav class="sub-nav">
   {{breadcrumbs}}
 </nav>
-
-<section class="clearfix section-area">
-  <h1>{{#if section.internal}}
-    <span class="visibility-internal" data-title="{{t 'internal'}}">
-      <span class="visibility-internal-icon"></span>
-    </span>
-  {{/if}} {{section.name}} {{subscribe}}</h1>
-  <p class="section-description">{{section.description}}</p>
-  <div class="section-tree">{{#if section.articles}}
-    <ul class="article-list">
+<div class="container">
+<section class="section knowledge-base">
+  <section class="categories blocks">
+    <ul class="blocks-listCat">
       {{#each section.articles}}
-        <li {{#if promoted}} class="article-promoted" {{/if}}>
-          {{#if promoted}}
-            <span data-title="{{t 'promoted'}}">★</span>
-          {{/if}}
-          <a href="{{url}}">{{title}}</a>
-        </li>
+          <li class="blocks-itemCat catalogoItem" id="{{title}}">
+            <a href='{{url}}' class="blocks-itemCat-link">
+              <h4 class="blocks-itemCat-title">{{title}}</h4>
+
+            </a>
+          </li>
       {{/each}}
     </ul>
-  {{else}}
-    <i class="section-empty">
-      <a href="{{section.url}}">{{t 'empty'}}</a>
-    </i>
-  {{/if}}
-
-  {{pagination}}</div>
+    {{pagination}}
+  </section>
 </section>
+
+
+
+{{else}}
+
+  {{#is section.name 'Funcionalidad'}}
+<section class="section func">
+<div class="hero-inner">
+  {{/is}}
+
+      {{#is section.name 'Configuración'}}
+<section class="section conf">
+<div class="hero-inner">
+  {{/is}}
+
+
+      {{#is section.name 'Reparación y Repuestos'}}
+<section class="section repa">
+<div class="hero-inner">
+  {{/is}}
+    <h1>¿Buscas algo más específico?</h1>
+  {{search submit=false instant=true class='search search-full'}}
+           {{#link 'new_request'  class="blocks-barra-link"}}
+           <h2>Contactar un agente de soporte</h2>
+        {{/link}}
+</div>
+</section>
+
+
+<div class="container">
+<nav class="sub-nav">
+  {{breadcrumbs}}
+</nav>
+    <section class="section">
+           <h2 class='blocks'> {{section.name}}</h2>
+
+{{#if section.description}}
+        <p class="page-header-description">{{section.description}}</p>
+      {{/if}}
+    {{#if section.articles}}
+      <ul class="article-list">
+        {{#each section.articles}}
+          <li class="article-list-item {{#if promoted}} article-promoted{{/if}}">
+            {{#if promoted}}
+              <span data-title="{{t 'promoted'}}" class="icon-star"></span>
+            {{/if}}
+            <a href="{{url}}" class="article-list-link">{{title}}</a>
+                          <div class="texto frecuente-textoSeccion" >
+             <p>{{body}}</p>
+            </div>
+          </li>
+        {{/each}}
+      </ul>
+    {{else}}
+      <i class="section-empty">
+        <a href="{{section.url}}">{{t 'empty'}}</a>
+      </i>
+    {{/if}}
+
+    {{pagination}}
+   </section>
+
+  <section class="section community">
+     <h2>Contactar un agente</h2>
+
+{{#link 'new_request'}}
+  <ul>
+      <li class="agentefont"> <i class="fa fa-handshake-o fa-5x "></i></li></ul>
+        {{/link}}
+  </section>
+{{/is}}
+</div>
