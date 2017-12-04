@@ -45,10 +45,10 @@
 <meta property="og:description" content="{{excerpt article.body characters=150}}">
 <meta property="og:url" content="http://soporte.lanix.co{{help_center.url}}">
 <meta property="og:site_name" content="Lanix Atención a Usuarios">
-<meta property="og:image" content="https://p4.zdassets.com/hc/theme_assets/2025662/115000009683/Lanix_Logo150px.png">
+<meta property="og:image" content="https:{{asset 'Lanix_Logo150px.png'}}">
 
 <meta name="twitter:description" content="{{excerpt article.body characters=110}}">
-<meta name="twitter:image" content="https:{{logo_url}}">
+<meta name="twitter:image" content="https:{{asset 'Lanix_Logo150px.png'}}">
 
 <script type='application/ld+json'>
 {
@@ -81,13 +81,13 @@
   		{{!-- when able to identify attachment type Modify #is to
       									"image": "https://soporte.lanx.co{{url}}"--}}
   		{{~#is @index 0~}}
-  			"image": "https://p4.zdassets.com/hc/theme_assets/2025662/115000009683/Lanix_Logo150px.png"
+  			"image": "https:{{asset 'Lanix_Logo150px.png'}}"
   		{{~/is~}}
   	{{~/each}}
   {{~else~}}
   {{!-- when able to identify attachment type Modify #is to
       									"image": "https://soporte.lanx.co{{url}}"--}}
-  "image": "https://p4.zdassets.com/hc/theme_assets/2025662/115000009683/Lanix_Logo150px.png"
+  "image": "https:{{asset 'Lanix_Logo150px.png'}}"
   {{~/if}}
 }
 </script>
